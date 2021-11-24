@@ -1,6 +1,5 @@
 var path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const PolyfillPlugin = require("node-polyfill-webpack-plugin")
 module.exports = {
     mode: 'development',
     entry: './app/js/main.js',
@@ -40,7 +39,6 @@ module.exports = {
             new HtmlWebpackPlugin({
                 title: 'My App',
                 template: './app/index.html'
-            }),
-            new PolyfillPlugin()
+            })
     ]
 };
