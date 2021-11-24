@@ -23,11 +23,11 @@ export default class ImageEditor {
                         width: imageObject.width,
                         height: imageObject.height,
                         ratio: this.imageObject.ratio ? this.imageObject.ratio : '', 
-                        scale: this.imageObject.scale ? this.imageObject.scale : 0.5
+                        scale: this.imageObject.scale ? this.imageObject.scale : 1
                     };
         this.coordinates = {
-                                x: this.imageObject.x ? this.imageObject.x : '', 
-                                y: this.imageObject.y ? this.imageObject.y : ''
+                                x: this.imageObject.x ? this.imageObject.x : 0, 
+                                y: this.imageObject.y ? this.imageObject.y : 0
                             };
         this.centerCoordinates = {
                                     x: '', 
@@ -40,43 +40,18 @@ export default class ImageEditor {
      * Seeting image object details
      */
     setImageObjectDetails() {
-        const {imageWidth, imageHeight, ratio} = this.getImageDimensions();
-        this.image.width= imageWidth;
-        this.image.height = imageHeight;
+        const {ratio} = this.getImageDimensions();
+        this.image.width= this.editorCanvas.width;
+        this.image.height = this.editorCanvas.height;
         this.image.ratio = ratio;
-        this.coordinates.x= (this.editorCanvas.width / 2) - (imageWidth / 2) * this.image.scale
-        this.centerCoordinates.x= (this.editorCanvas.width / 2) - (imageWidth / 2) * this.image.scale,
-        this.coordinates.y= (this.editorCanvas.height / 2) - (imageHeight / 2) * this.image.scale
-        this.centerCoordinates.y= (this.editorCanvas.height / 2) - (imageHeight / 2) * this.image.scale
     }
 
     /**
      *  To get Minimal Image Dimensions 
      */
     getImageDimensions() {
-        // setting minimum width and height
-        const minWidth  = this.editorCanvas.width;
-        const minHeight = this.editorCanvas.height;
-        const ratio     = this.imageObject.width / this.imageObject.height; //given image aspect ratio
-
-        let imageWidth, imageHeight = 0;
-        const isWidthGreater = this.imageObject.width > this.imageObject.height;
-
-        if (isWidthGreater && this.imageObject.height < minHeight) {
-            imageHeight  = minHeight;
-            imageWidth = this.imageObject.height * ratio;
-        } else if(isWidthGreater && this.imageObject.width < minWidth) {
-            imageWidth  = minWidth;
-            imageHeight = this.imageObject.width * ratio;
-        } else if(isWidthGreater) {
-            imageHeight = minHeight;
-            imageWidth  = this.imageObject.height * ratio;
-        } else {
-            imageWidth  = minWidth;
-            imageHeight = this.imageObject.width / ratio;
-        }
-
-        return { imageWidth, imageHeight, ratio }
+        const ratio = this.imageObject.width / this.imageObject.height; //given image aspect ratio
+        return {  ratio }
     };
 
     /**
