@@ -13,7 +13,7 @@ export default function ImageReader(fileid, canvas, toolbar) {
         const imgObj         = {};
         if (file.type.match(VALID_FILE_FORMATS)) {
             const reader = new FileReader();
-            reader.onloadend = function(e) {
+            reader.onloadend = function() {
                 const img = new Image();
                 img.src = reader.result;
                 img.onload = function() {

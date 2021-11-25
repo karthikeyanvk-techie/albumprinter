@@ -51,7 +51,7 @@ const readFromJsonFile = (jsonFileInput, canvas, toolbar, fileSelector) => {
         reader.readAsText( files[0] );
     } catch (error) {
         const message = 'Cannot read file now. Please try again later.';
-        document.getElementById(fileid.id).value = null; 
+        document.getElementById(fileSelector.id).value = null; 
         document.getElementById('info').innerHTML = message;
     }
 }

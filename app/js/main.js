@@ -1,4 +1,5 @@
 import '../css/main.scss'
+import '../css/loader.scss'
 import ImageReader from './service/imageReaderService';
 import { readFromJsonFile } from './service/jsonFileService';
 import { BUTTONS  } from './constants';
@@ -6,7 +7,15 @@ import { BUTTONS  } from './constants';
 const AppView = () => {
     /* canvas width set 1440 and 960 to match 15” x 10” in size */
     document.body.innerHTML = ` <h1>Album Printer</h1>
-                                <div class="main-wrapper">
+                                <div class="loader-wrapper" id="loader-parent">
+                                    <h2> Loading Canvas </h2>
+                                    <div id="loader"></div>
+                                    <div id="loader"></div>
+                                    <div id="loader"></div>
+                                    <div id="loader"></div>
+                                    <div id="loader"></div>
+                                </div>
+                                <div class="main-wrapper" id="main">
                                     <div class="file-selector>
                                         <form action="#">
                                             <fieldset>
@@ -41,6 +50,12 @@ const AppView = () => {
 
     //to make sure we bind the on change event after entire page loads
     window.onload = function() {
+        document.getElementById('loader-parent').style.display = 'block';
+        document.getElementById('main').style.display = 'none';
+        setInterval(function(){
+            document.getElementById('loader-parent').style.display = 'none';
+            document.getElementById('main').style.display = 'block';
+        }, 3000);
         //grab DOM elements inside index.html 
         const fileSelector = document.getElementById( "fileSelector" );
         const canvas = document.getElementById('editorCanvas');
@@ -48,15 +63,15 @@ const AppView = () => {
         const importButton = document.getElementById(BUTTONS.IMPORT);
         const jsonFileInput = document.getElementById(BUTTONS.IMPORTFILE);
         //changing onchange to addEventListener since wecan attach multiple event listeners
-        fileSelector.addEventListener("change", function(event) {
+        fileSelector.addEventListener("change", function() {
             //setting scale to default value
             document.querySelector('.image-scale').value = 100;
             new ImageReader(fileSelector, canvas, toolbar);
         });
-        importButton.addEventListener("click", function(event){
+        importButton.addEventListener("click", function(){
             document.getElementById(BUTTONS.IMPORTFILE).click();
         });
-        jsonFileInput.addEventListener("change", function(event) {
+        jsonFileInput.addEventListener("change", function() {
             readFromJsonFile(jsonFileInput, canvas, toolbar, fileSelector)
         });
     }

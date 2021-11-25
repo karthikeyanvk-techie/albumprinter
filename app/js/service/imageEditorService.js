@@ -3,7 +3,7 @@ import {  BUTTONS } from '../constants';
 
 /**
  * Class to Edit/Process image inside canvas
- * input is image object
+ *
  */
 export default class ImageEditor {
     constructor(imageObject, canvas, toolbar, fileSelector) {
@@ -37,7 +37,7 @@ export default class ImageEditor {
     }
 
     /**
-     * Seeting image object details
+     * Setting image object details
      */
     setImageObjectDetails() {
         const {ratio} = this.getImageDimensions();
@@ -52,18 +52,18 @@ export default class ImageEditor {
     getImageDimensions() {
         const ratio = this.imageObject.width / this.imageObject.height; //given image aspect ratio
         return {  ratio }
-    };
+    }
 
     /**
      * Function to redraw the image inside the canvas
      * to fill the full surface of the canvas as required
-     **/
+     */
     redraw() {
         const width = this.image.width * this.image.scale;
         const height = this.image.height * this.image.scale;
         this.clear();
         this.editorCanvas.ctx.drawImage(this.image.file, this.coordinates.x, this.coordinates.y, width, height);
-    };
+    }
 
 
     /**
@@ -77,7 +77,7 @@ export default class ImageEditor {
           y: event.clientY - canavas.top
         };
         return mousePosition;
-    };
+    }
 
     /** 
      *  Initilize Canvas 
@@ -136,7 +136,7 @@ export default class ImageEditor {
 
 
         //Adding Event Listeners for mouse events - MouseUp and MouseDown
-        window.addEventListener("mouseup", function(event) {
+        window.addEventListener("mouseup", function() {
             window.removeEventListener("mousemove", self.dragPosition, false);
         });
 
@@ -146,12 +146,12 @@ export default class ImageEditor {
 
         // Adding Event Listeners for scalling
         const scale = self.toolbar.querySelector(".image-scale");
-        scale.addEventListener('input', function(event) {
+        scale.addEventListener('input', function() {
             let value = self.toolbar.querySelector(".image-scale").value;
             value = value / 100;
             self.scale(value); 
         });
-    };
+    }
 
     /**
      * Function to clear canvas data
@@ -170,7 +170,7 @@ export default class ImageEditor {
             x: this.coordinates.x + ((this.image.width * this.image.scale) / 2), 
             y: this.coordinates.y + ((this.image.height * this.image.scale) / 2)
         };
-    };
+    }
 
     /**
      * Function to move image down by 10
@@ -182,7 +182,7 @@ export default class ImageEditor {
             x: this.coordinates.x + ((this.image.width * this.image.scale) / 2), 
             y: this.coordinates.y + ((this.image.height * this.image.scale) / 2)
         };
-    };
+    }
 
     /**
      * Function to scale between 10 and 200
@@ -192,7 +192,7 @@ export default class ImageEditor {
     scale(scale) {
         this.image.scale = scale;
         this.redraw();
-    };
+    }
     
     /**
      * Function to move image to left position by 10
@@ -204,7 +204,7 @@ export default class ImageEditor {
             x: this.coordinates.x + ((this.image.width * this.image.scale) / 2), 
             y: this.coordinates.y + ((this.image.height * this.image.scale) / 2)
         };
-    };
+    }
 
     /**
      * Fcuntion to move image to right position by 10
@@ -216,7 +216,7 @@ export default class ImageEditor {
             x: this.coordinates.x + ((this.image.width * this.image.scale) / 2), 
             y: this.coordinates.y + ((this.image.height * this.image.scale) / 2)
         };
-    };
+    }
 
     /**
      * Function to add event listener to capture mouse drag
@@ -230,7 +230,7 @@ export default class ImageEditor {
         };
         this.dragPosition = this.dragPosition.bind(this);
         window.addEventListener("mousemove", this.dragPosition, false);
-    };
+    }
 
     /**
      * Function to move the position to dragged position
@@ -245,7 +245,7 @@ export default class ImageEditor {
             x: this.coordinates.x + ((this.image.width*this.image.scale) / 2), 
             y: this.coordinates.y + ((this.image.height*this.image.scale) / 2)
         };
-    };
+    }
 
     /**
      * Saving canvas data to json file
@@ -267,6 +267,6 @@ export default class ImageEditor {
             }
         }
         createJSONFile(canvasObj);
-    };
+    }
 
-};
+}
