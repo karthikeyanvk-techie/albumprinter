@@ -1,3 +1,33 @@
+# Solution
+
+In the root of this repository, you can resolve all these dependencies via
+the command line using:
+
+    npm install
+    
+You can now start developing the application using Webpack by typing:
+
+    npm start
+
+You can run test cases using
+
+    npm run test
+
+You can check for lint or fix lint using
+
+    npm run lint
+    npm run lint:fix
+
+Documentation is generated and available under documentation folder. 
+
+I have added small css based loader animation before loading the canvas. (3 seconds)
+
+
+
+
+
+
+
 # Albelli test
 
 This repository contains a basic setup for a JavaScript project. 
